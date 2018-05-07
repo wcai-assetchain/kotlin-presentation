@@ -13,6 +13,7 @@
 # Design Philosophy
 #### A Better Language Than Java
 - Concise and Expressive
+- Null Safety
 - Fully Compatible and Interoperable with Java
 - Smooth Learning Curve
 - Gradual Migration
@@ -67,6 +68,71 @@ fun foo(a: Int, b: Int): Int {
     return a + b + x + y + z + (n ?: 0)
 }
 ```
+
+
+### Variables
+##### Null Safety
+
+```
+// Kotlin distinguishes between nullable references
+// and non-null references:
+
+var a: String = "abc"
+a = null // compilation error
+
+var b: String? = "abc"
+b = null // ok
+
+val aLen = a.length // ok
+
+val bLen = b.length // compilation error because b may be null
+                    // you have to tell kotlin what to do if b = null
+                    // instead of ignore it and throw NPE at runtime
+```
+
+
+### Variables
+##### Null Safety
+
+```
+// Verbose way:
+val bLen: Int
+if (b != null) {
+    bLen = b.length // smart cast happens here
+} else {
+    bLen = -1
+}
+
+// With safe calls
+val bLen: Int? = b?.length // bLen is null if b is null
+
+// Chained safe calls
+alex?.department?.manager?.lastName
+
+```
+
+
+### Variables
+##### Null Safety
+
+```
+// Don't like nullable bLen? Safe call + elvis operator
+// Same as the verbose way above but more concise
+val bLen: Int = b?.length ?: -1
+
+// Just want to ignore the fact that b could be null
+// non_null assertion => may throw NPE at runtime
+val bLen = b!!.length
+```
+
+
+### Variables
+##### Null Safety
+
+With null safety:
+- Still have to write logic that handles null values, especially for inputs that are passed in from outside, e.g. HTTP requests
+- But it eliminates a lot of verbose null check logic within the module
+- And it makes interfaces between components clearer: it explicitly states which arguments accept null values and which not
 
 
 
