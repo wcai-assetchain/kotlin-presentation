@@ -72,6 +72,27 @@ fun foo(a: Int, b: Int): Int {
 
 
 ### Variables
+##### Mutable VS Immutable
+
+```
+val n: Int = 99 // immutable
+n = 100 // compilation error
+
+var x: Int = -1 // mutable
+x = 17 // ok
+
+// In Java
+final int n  = 99;
+in x = -1;
+
+// All function arguments are immutable
+fun bar(input: String) {
+  // input is immutable
+}
+```
+
+
+### Variables
 ##### Null Safety
 
 ```
