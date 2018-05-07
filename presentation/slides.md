@@ -13,7 +13,8 @@
 # Design Philosophy
 #### A Better Language Than Java
 - Concise and Expressive
-- Null Safety
+- Null Safety, Immutability
+- Composition Over Inheritance
 - Fully Compatible and Interoperable with Java
 - Smooth Learning Curve
 - Gradual Migration
