@@ -327,3 +327,23 @@ val card = Card(QUEEN, HEARTS)
 // With infix notation => expressive and concise
 val card = QUEEN of HEARTS
 ```
+
+
+### Functions
+<small>Higher-Order Functions / Function Types / Lambdas</small>
+
+- <small>A function that takes functions as parameters, or returns a function</small>
+
+```
+fun <T> filter(list: List<T>, predicate: (T) -> Boolean): List<T> {
+    // ...
+}
+```
+- <small>Function type</small>
+
+```
+val strPredicate: (String) -> Boolean = ...
+val onClick: () -> Unit = ...
+// TODO: put an advanced function type here, e.g. curry
+```
+
