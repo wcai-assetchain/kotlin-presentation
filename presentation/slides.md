@@ -47,7 +47,8 @@
 
 
 
-# Syntax
+# Features
+That make it better than Java
 
 
 
@@ -175,6 +176,34 @@ fun foo(a: Int, b: Int): Int {
 
     return a + b + x + y + z + (n ?: 0)
 }
+```
+
+
+### Functions
+##### Top Level Function
+
+<small>In Kotlin functions can be declared at top level in a file</small>
+
+```
+// TimeUtils.kt
+package com.company.demo.util
+import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME
+fun localDateString(zoneId: ZoneId): String {
+    return LocalDateTime.now(this).format(ISO_LOCAL_DATE_TIME)
+}
+
+```
+
+```
+// App.kt
+package com.company.demo
+import com.company.demo.util.localDateString
+fun main(args: Array<String>) {
+  System.out.println(
+      localDateString(ZoneId.of("Australia/Brisbane"))
+  );
+}
+
 ```
 
 
@@ -330,20 +359,34 @@ val card = QUEEN of HEARTS
 
 
 ### Functions
-<small>Higher-Order Functions / Function Types / Lambdas</small>
-
-- <small>A function that takes functions as parameters, or returns a function</small>
+<small>Higher-Order Functions / Function Types</small>
 
 ```
-fun <T> filter(list: List<T>, predicate: (T) -> Boolean): List<T> {
-    // ...
-}
-```
-- <small>Function type</small>
+// A high-order function is a function that:
+// takes functions as parameters or returns a function
+fun <T> filter(list: List<T>, predicate: (T) -> Boolean): List<T>
 
-```
+// Function Types
 val strPredicate: (String) -> Boolean = ...
 val onClick: () -> Unit = ...
-// TODO: put an advanced function type here, e.g. curry
+val localDatetimeFormat: (ZoneId) -> (ZonedDateTime) -> String = ...
+fun <T, R> map(list: List<T>, mapper: (T) -> R) { ... }
+
+// In Java
+public interface Function<T, R> { R apply(T t); }
+```
+
+
+### Functions
+<small>Lambdas</small>
+
+```
+```
+
+
+### Functions
+<small>Extension Function</small>
+
+```
 ```
 
