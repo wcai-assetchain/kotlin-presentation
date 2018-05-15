@@ -48,8 +48,14 @@
 
 
 # Features
-That make it better than Java
+That make Kotlin awsome
 
+
+
+### Variables
+- Null Safety
+- Immutablity
+- Type Inference / Smart Casts
 
 
 ### Variables
@@ -153,10 +159,49 @@ val bLen = b!!.length
 ##### Null Safety
 
 With null safety:
-- Still have to write logic that handles null values, especially for inputs that are passed in from outside, e.g. HTTP requests
-- But it eliminates a lot of verbose null check logic within the module
+- Still need to use nullable variables and write logic that handles null values sometimes, especially for inputs that are passed in from outside, e.g. HTTP requests
+- But use non-null variables wherever possible and it can eliminates a lot of verbose null check logic within the module
 - And it makes interfaces between components clearer: it explicitly states which arguments accept null values and which not
 
+
+### Variables
+##### Smart Casts
+
+```
+// Java
+public int eval(Expr expr) {
+    if (expr instanceof Num) {
+        return ((Num) expr).getValue();
+    }
+    if (expr instanceof Sum) {
+        Sum sum = (Sum) expr;
+        return eval(sum.getLeft()) + eval(sum.getRight());
+    }
+    throw new IllegalArgumentException();
+}
+```
+
+
+### Variables
+##### Smart Casts
+
+```
+// Kotlin
+fun eval(expr: Expr): Int =
+        when (expr) {
+            is Num -> expr.value
+            is Sum -> eval(expr.left) + eval(expr.right)
+            else -> throw IllegalArgumentException()
+        }
+```
+
+
+
+### Functions
+
+- Expressive
+- Concise
+- Top Level
 
 
 ### Functions
