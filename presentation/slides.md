@@ -30,7 +30,7 @@
 
 <img src="https://sdtimes.com/wp-content/uploads/2016/05/0517.sdt-gradle.png" style="width: 96px; margin: 0 10px 0 0; background: #fff; border: none; box-shadow: none;"/>
 
-<img src="http://www.iconsplace.com/download/red-pinterest-256.ico" style="width: 96px; margin: 0 10px 0 0; background: none; border: none; box-shadow: none;"/>
+<img src="https://business.pinterest.com/profiles/contrib/pin/logo.svg" style="width: 96px; margin: 0 10px 0 0; background: none; border: none; box-shadow: none;"/>
 
 <img src="http://icons.iconarchive.com/icons/martz90/circle/256/evernote-icon.png" style="width: 96px; margin: 0 10px 0 0; background: none; border: none; box-shadow: none;"/>
 </p>
@@ -199,9 +199,9 @@ fun eval(expr: Expr): Int =
 
 ### Functions
 
-- Expressive
 - Concise
-- Top Level
+- Expressive
+- Fist-Class Citizen
 
 
 ### Functions
@@ -234,7 +234,7 @@ fun foo(a: Int, b: Int): Int {
 package com.company.demo.util
 import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME
 fun localDateString(zoneId: ZoneId): String {
-    return LocalDateTime.now(this).format(ISO_LOCAL_DATE_TIME)
+    return LocalDateTime.now(zoneId).format(ISO_LOCAL_DATE_TIME)
 }
 
 ```
@@ -353,7 +353,7 @@ long copyLarge(InputStream input, OutputStream output, long inputOffset, long le
 
 
 ### Functions
-##### Vararg & Spread Operator 
+##### Vararg & Spread Operator
 
 ```
 fun max(vararg numbers: Int): Int {
@@ -363,6 +363,28 @@ fun max(vararg numbers: Int): Int {
 
 val integers = intArrayOf(4, 5, 6)
 max(1, 2, *integers, 7, 8)
+```
+
+
+### Functions
+##### Extension Function / Function with receiver
+
+<small>"add" methods to existing types without creating a new derived type</small>
+
+```
+// TimeUtils.kt
+fun ZoneId.toLocalDateString(): String =
+    LocalDateTime.now(this).format(ISO_LOCAL_DATE_TIME)
+```
+
+```
+// App.kt
+fun main(args: Array<String>) {
+  System.out.println(
+      ZoneId.of("Australia/Brisbane").toLocalDateString()
+  );
+}
+
 ```
 
 
@@ -404,21 +426,39 @@ val card = QUEEN of HEARTS
 
 
 ### Functions
-<small>Higher-Order Functions / Function Types</small>
+##### First-Class Citizen
+
+Kotlin functions are first-class, and you can operate with functions in any way that is possible for other non-function values:
+
+- stored in variables and data structures
+
+- passed as arguments to and returned from other higher-order functions
+
+
+### Functions
+##### First-Class Citizen
+<small>Function Types</small>
+
+```
+val strPredicate: (String) -> Boolean = ...
+val onClick: () -> Unit = ...
+val localDatetimeFormat: (ZoneId) -> (ZonedDateTime) -> String = ...
+val repeat: String.(times: Int) -> String = ...
+fun <T, R> map(list: List<T>, mapper: (T) -> R) { ... }
+
+// In Java
+public interface Function<T, R> { R apply(T t); }
+```
+
+
+### Functions
+##### First-Class Citizen
+<small>High-order Function</small>
 
 ```
 // A high-order function is a function that:
 // takes functions as parameters or returns a function
 fun <T> filter(list: List<T>, predicate: (T) -> Boolean): List<T>
-
-// Function Types
-val strPredicate: (String) -> Boolean = ...
-val onClick: () -> Unit = ...
-val localDatetimeFormat: (ZoneId) -> (ZonedDateTime) -> String = ...
-fun <T, R> map(list: List<T>, mapper: (T) -> R) { ... }
-
-// In Java
-public interface Function<T, R> { R apply(T t); }
 ```
 
 
