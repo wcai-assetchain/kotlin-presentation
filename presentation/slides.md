@@ -38,7 +38,7 @@
 <p>
 <img src="https://www.shareicon.net/data/128x128/2016/11/03/849474_social_512x512.png" style="width: 96px; margin: 0 10px 0 0; background: #fff; border: none; box-shadow: none;"/>
 
-<img src="https://www.corda.net/wp-content/uploads/2017/01/16-10-31_R3_Corda_Master-Logo-04-1-e1516308027926-1024x455.png" style="height: 96px; margin: 0 6px 0 0; background: none; border: none; box-shadow: none;"/>
+<img src="https://www.corda.net/img/cordalogo.png" style="height: 96px; margin: 0 6px 0 0; background: none; border: none; box-shadow: none;"/>
 
 <img src="https://i.pinimg.com/originals/b9/33/ab/b933abf000b8b16ddb6f2772f401630c.png" style="width: 96px; margin: 0 10px 0 0; background: none; border: none; box-shadow: none;"/>
 
@@ -466,12 +466,55 @@ fun <T> filter(list: List<T>, predicate: (T) -> Boolean): List<T>
 <small>Lambdas</small>
 
 ```
+1. Lambda expression is 'function literals'
+2. A lambda expression is surrounded by curly braces
+3. parameter declarations inside curly braces
+4. body goes after an -> sign
+5. the last expression inside the lambda body is treated as the return value
+
+val sum: (Int, Int) -> Int = { x: Int, y: Int ->
+    val s = x + y
+    s
+}
+
+val sum = { x: Int, y: Int -> x + y }
+
+val sum: (Int, Int) -> Int = { x, y -> x + y }
 ```
 
 
 ### Functions
-<small>Extension Function</small>
+<small>Passing a lambda to the last parameter</small>
+
+<small>Implicit name of a single parameter</small>
 
 ```
+fun filter(list: Iterable<String>, predicate: (String) -> Boolean) {
+    ...
+}
+
+filter(
+        listOf("alpha", "beta"),
+        { str -> str.startsWith("a")}
+)
+
+filter(listOf("alpha", "beta")) {
+    it.startsWith("a")
+}
+```
+
+
+### Functions
+<small>Use Lambda As Extension Function</small>
+
+```
+fun filter(list: Iterable<String>, predicate: String.() -> Boolean) {
+    ...
+}
+
+filter(listOf("alpha", "beta")) {
+    this.startsWith("a")
+}
+
 ```
 
